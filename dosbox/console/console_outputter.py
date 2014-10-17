@@ -1,4 +1,4 @@
-class ConsoleOutputter:
+class ConsoleOutputter(object):
     number_of_printed_chars = 0
 
     def println(self, text):

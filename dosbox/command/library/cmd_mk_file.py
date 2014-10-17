@@ -1,8 +1,8 @@
-from dosbox.command.framework.command import *
+from dosbox.command.base_command import *
 
 from dosbox.filesystem.file import *
 
-class CmdMkFile(Command):
+class CmdMkFile(BaseCommand):
 
     def __init__(self, name, drive):
         super().__init__(name, drive)
@@ -14,7 +14,7 @@ class CmdMkFile(Command):
         return True
 
     def execute(self, outputter):
-        file_name = self.param_at(0)
-        file_content = self.param_at(1)
+        file_name = self.param(0)
+        file_content = self.param(1)
         file = File(file_name, file_content)
         self.drive.current_dir.add(file)

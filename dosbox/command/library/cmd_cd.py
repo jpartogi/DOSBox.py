@@ -1,7 +1,7 @@
-from dosbox.command.framework.command import *
+from dosbox.command.base_command import *
 
 
-class CmdCd(Command):
+class CmdCd(BaseCommand):
     SYSTEM_CANNOT_FIND_THE_PATH_SPECIFIED = "The system cannot find the path specified."
     DESTINATION_IS_FILE = "The directory name is invalid."
 
@@ -13,36 +13,37 @@ class CmdCd(Command):
         return num_of_params == 0 or num_of_params == 1
 
     def check_param_values(self, outputter):
-        if self.params_count() > 0:
-            self.destination_directory = self.extract_and_check_if_valid_directory(self.param_at(0), self.drive, outputter)
+        if self.num_of_params() > 0:
+            self.destination_directory = self.extract_and_check_if_valid_directory(self.param(0), outputter)
             return self.destination_directory is not None
 
         return True
 
     def execute(self, outputter):
-        if self.params_count() == 0:
-            self.print_current_directory_path(self.drive.current_dir.path(), outputter)
+        if self.num_of_params() == 0:
+            self.print_current_directory_path(self.drive.current_dir.path, outputter)
         else:
-            self.change_current_directory(self.destination_directory, self.drive, outputter)
+            self.change_current_directory(self.destination_directory, outputter)
 
-    def change_current_directory(self, destination_directory, drive, outputter):
-        success = self.drive.change_current_dir(destination_directory)
+    def change_current_directory(self, destination_directory, outputter):
+        successful = self.drive.change_current_dir(destination_directory)
 
-        if not success:
+        if not successful:
             outputter.println(self.SYSTEM_CANNOT_FIND_THE_PATH_SPECIFIED)
 
-    def print_current_directory_path(self, current_directory_name, outputter):
+    @staticmethod
+    def print_current_directory_path(current_directory_name, outputter):
         outputter.println(current_directory_name)
 
-    def extract_and_check_if_valid_directory(self, destination_directory_name, drive, outputter):
-        tmp_dir = self.drive.item_from_path(destination_directory_name)
+    def extract_and_check_if_valid_directory(self, dest_dir_name, outputter):
+        directory = self.drive.item_from_path(dest_dir_name)
 
-        if tmp_dir is None:
+        if directory is None:
             outputter.println(self.SYSTEM_CANNOT_FIND_THE_PATH_SPECIFIED)
             return None
 
-        if not tmp_dir.is_directory():
+        if not directory.is_directory():
             outputter.println(self.DESTINATION_IS_FILE)
             return None
 
-        return tmp_dir
+        return directory

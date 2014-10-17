@@ -26,7 +26,7 @@ class CmdDirTestCase(CommandBaseTestCase):
     def test_cmd_dir_without_parameter_print_path_of_current_directory(self):
         self.drive.change_current_dir(self.root_dir)
         self.execute_command("dir")
-        self.assertIn(self.root_dir.path(), self.outputter.output)
+        self.assertIn(self.root_dir.path, self.outputter.output)
 
     def test_cmd_dir_without_parameter_print_files(self):
         self.drive.change_current_dir(self.root_dir)
@@ -61,17 +61,17 @@ class CmdDirTestCase(CommandBaseTestCase):
 
     def test_CmdDir_FileAsParameter_PrintGivenPath(self):
         self.drive.change_current_dir(self.root_dir)
-        self.execute_command("dir " + self.file1_in_sub_dir1.path())
-        self.assertIn(self.sub_dir1.path(), self.outputter.output)
+        self.execute_command("dir " + self.file1_in_sub_dir1.path)
+        self.assertIn(self.sub_dir1.path, self.outputter.output)
 
     def test_CmdDir_FileAsParameter_PrintFilesInGivenPath(self):
         self.drive.change_current_dir(self.root_dir)
-        self.execute_command("dir " + self.file1_in_sub_dir1.path())
+        self.execute_command("dir " + self.file1_in_sub_dir1.path)
         self.assertIn("1 File(s)", self.outputter.output)
 
     def test_CmdDir_FileAsParameter_PrintsFooter(self):
         self.drive.change_current_dir(self.root_dir)
-        self.execute_command("dir " + self.file1_in_sub_dir1.path())
+        self.execute_command("dir " + self.file1_in_sub_dir1.path)
         self.assertIn(self.file1_in_sub_dir1.name, self.outputter.output)
 
     def test_cmd_dir_non_existing_directory_print_error(self):

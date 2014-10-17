@@ -1,7 +1,7 @@
-from dosbox.command.framework.command import *
+from dosbox.command.base_command import *
 
 
-class CmdDir(Command):
+class CmdDir(BaseCommand):
     SYSTEM_CANNOT_FIND_THE_PATH_SPECIFIED = "File Not Found."
 
     def __init__(self, name, drive):
@@ -12,7 +12,7 @@ class CmdDir(Command):
         return num_of_params == 0 or num_of_params == 1
 
     def check_param_values(self, outputter):
-        if self.params_count() == 0:
+        if self.num_of_params() == 0:
             self.directory_to_print = self.drive.current_dir
         else:
             self.directory_to_print = self.check_and_prepare_path_param(self.params[0], outputter)
@@ -39,22 +39,24 @@ class CmdDir(Command):
 
     @staticmethod
     def print_header(directory_to_print, outputter):
-        outputter.println("Directory of " + directory_to_print.path())
+        outputter.println(" Directory of " + directory_to_print.path)
         outputter.newline()
 
     @staticmethod
     def print_content(directory_content, outputter):
         for item in directory_content:
             if item.is_directory():
+                outputter.print("\t\t")
                 outputter.print("<DIR>")
+                outputter.print("\t ")
             else:
-                outputter.print( str(item.size()) )
+                outputter.print("\t\t\t")
+                outputter.print(str(item.size()))
 
-            outputter.print("\t" + item.name)
-            outputter.newline()
+            outputter.println(" " + item.name)
 
     @staticmethod
     def print_footer(directory_to_print, outputter):
-        outputter.println("\t" + str(directory_to_print.number_of_contained_files()) + " File(s)");
-        outputter.println("\t" + str(directory_to_print.number_of_contained_directories()) + " Dir(s)");
+        outputter.println("\t" + str(directory_to_print.num_of_contained_files()) + " File(s)")
+        outputter.println("\t" + str(directory_to_print.num_of_contained_dirs()) + " Dir(s)")
 

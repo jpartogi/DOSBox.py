@@ -2,7 +2,7 @@ from sys import stdin
 
 from dosbox.console.console_outputter import *
 
-class Console:
+class Console(object):
     def __init__(self, invoker, drive):
         self.invoker = invoker
         self.drive = drive

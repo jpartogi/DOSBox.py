@@ -1,9 +1,9 @@
-from dosbox.command.framework.command import *
+from dosbox.command.base_command import *
 
 from dosbox.filesystem.directory import *
 
 
-class CmdMkDir(Command):
+class CmdMkDir(BaseCommand):
     PARAMETER_CONTAINS_BACKLASH = "At least one parameter denotes a path rather than a directory name."
 
     def __init__(self, name, drive):
@@ -13,14 +13,14 @@ class CmdMkDir(Command):
         return True if num_of_params >= 1 else False
 
     def check_param_values(self, outputter):
-        for i in range(self.params_count()):
+        for i in range(self.num_of_params()):
             if self.parameter_contains_backlashes(self.params[i], outputter):
                 return False
 
         return True
 
     def execute(self, outputter):
-        for i in range(self.params_count()):
+        for i in range(self.num_of_params()):
             self.create_directory(self.params[i], self.drive)
 
     def parameter_contains_backlashes(self, param, outputter):

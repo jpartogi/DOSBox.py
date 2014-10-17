@@ -3,7 +3,7 @@ from dosbox.command.library.cmd_mk_dir import *
 from dosbox.command.library.cmd_mk_file import *
 from dosbox.command.library.cmd_cd import *
 
-class Factory:
+class Factory(object):
     def __init__(self, drive):
         self.drive = drive
         self.commands = list()

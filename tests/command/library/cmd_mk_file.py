@@ -16,7 +16,7 @@ class CmdMkFileTestCase(CommandBaseTestCase):
         file_content = "blah"
 
         self.execute_command("mkfile " + file_name + " " + file_content)
-        self.assertEqual(self.number_of_files_before_test + 1, self.root_dir.number_of_contained_files())
+        self.assertEqual(self.number_of_files_before_test + 1, self.root_dir.num_of_contained_files())
 
         file = self.drive.item_from_path(self.drive.drive_letter_colon + "\\" + file_name)
         self.assertEqual(file_content, file.content)

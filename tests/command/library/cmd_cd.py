@@ -23,12 +23,12 @@ class CmdCdTestCase(CommandBaseTestCase):
         self.invoker.add_command(self.command)
 
     def test_CmdCd_ChangeToSubdirectory_ChangesDirectory(self):
-        self.execute_command("cd " + self.sub_dir1.path())
+        self.execute_command("cd " + self.sub_dir1.path)
         self.assertEqual("", self.outputter.output)
         self.assertEqual(self.drive.current_dir, self.sub_dir1)
 
     def test_CmdCd_ChangeToSubDirectoryWithEndingBacklash_ChangesDirectory(self):
-        self.execute_command("cd " + self.sub_dir1.path() + "\\")
+        self.execute_command("cd " + self.sub_dir1.path + "\\")
         self.assertEqual("", self.outputter.output)
         self.assertEqual(self.drive.current_dir, self.sub_dir1)
 
@@ -71,7 +71,7 @@ class CmdCdTestCase(CommandBaseTestCase):
         self.drive.change_current_dir(self.sub_dir1)
         self.execute_command("cd")
 
-        self.assertIn(self.sub_dir1.path(), self.outputter.output)
+        self.assertIn(self.sub_dir1.path, self.outputter.output)
 
     def test_CmdCd_WithInvalidAbsolutePath_RemainsInCurrentDirectory(self):
         self.drive.change_current_dir(self.sub_dir1)
@@ -82,7 +82,7 @@ class CmdCdTestCase(CommandBaseTestCase):
 
     def CmdCd_WithFileAsPath_RemainsInCurrentDirectory(self):
         self.drive.change_current_dir(self.sub_dir1)
-        self.execute_command("cd " + self.file1_in_sub_dir1.path())
+        self.execute_command("cd " + self.file1_in_sub_dir1.path)
 
         self.assertEqual(CmdCd.DESTINATION_IS_FILE, self.outputter.output)
         self.assertEqual(self.drive.current_dir, self.sub_dir1)
@@ -104,9 +104,9 @@ class CmdCdTestCase(CommandBaseTestCase):
     def test_CmdCd_AllParametersAreReset(self):
         self.drive.change_current_dir(self.root_dir)
 
-        self.execute_command("cd " + self.sub_dir1.path())
+        self.execute_command("cd " + self.sub_dir1.path)
         self.assertEqual("", self.outputter.output)
         self.assertEqual(self.drive.current_dir, self.sub_dir1)
 
         self.execute_command("cd")
-        self.assertIn(self.sub_dir1.path(), self.outputter.output)
+        self.assertIn(self.sub_dir1.path, self.outputter.output)

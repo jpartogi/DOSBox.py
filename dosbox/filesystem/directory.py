@@ -27,7 +27,7 @@ class Directory(FileSystemItem):
     def is_directory(self):
         return True
 
-    def number_of_contained_files(self):
+    def num_of_contained_files(self):
         number_of_files = 0
 
         for item in self.content:
@@ -36,7 +36,7 @@ class Directory(FileSystemItem):
 
         return number_of_files
 
-    def number_of_contained_directories(self):
+    def num_of_contained_dirs(self):
         number_of_dirs = 0
 
         for item in self.content:

@@ -1,6 +1,6 @@
 from dosbox.filesystem.directory import *
 
-class Drive:
+class Drive(object):
     def __init__(self, drive_letter):
         self.drive_letter = drive_letter.upper()
         self.drive_letter_colon = self.drive_letter + ":"
@@ -18,7 +18,7 @@ class Drive:
         return NotImplemented
 
     def change_current_dir(self, dir):
-        if self.item_from_path(dir.path()) == dir:
+        if self.item_from_path(dir.path) == dir:
             self.current_dir = dir
             return True
         else:
@@ -37,7 +37,7 @@ class Drive:
 
         # Check for ..\
         if len(item_path) >= 3 and "..\\" in item_path:
-            item_path = self.current_dir.parent.path() + "\\" + item_path[3:len(item_path)]
+            item_path = self.current_dir.parent.path + "\\" + item_path[3:len(item_path)]
 
         # Check for .\
         if len(item_path) >= 2 and ".\\" in item_path:
@@ -59,10 +59,10 @@ class Drive:
 
         # Make absolute path from relative paths
         if len(item_path) == 1 or ':' not in item_path:
-            item_path = self.current_dir.path() + "\\" + item_path
+            item_path = self.current_dir.path + "\\" + item_path
 
         # Find more complex paths recursively
-        if item_path == self.root_dir.path():
+        if item_path == self.root_dir.path:
             return self.root_dir
 
         return self.item_from_dir(item_path, self.root_dir)
@@ -71,7 +71,7 @@ class Drive:
         content = dir.content
 
         for item in content:
-            path = item.path()
+            path = item.path
 
             if path.lower() == item_name.lower():
                 return item
@@ -84,7 +84,7 @@ class Drive:
         return None
 
     def prompt(self):
-        return self.current_dir.path() + "\>"
+        return self.current_dir.path + "\>"
 
     def drive_letter(self):
         return self.drive_letter + ":"

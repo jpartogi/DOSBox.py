@@ -1,17 +1,17 @@
 import abc
 
 
-class Command:
+class BaseCommand(object):
     INCORRECT_SYNTAX = "The syntax of the command is incorrect."
     DEFAULT_ERROR_MESSAGE_WRONG_PARAMETER = "Wrong parameter entered."
 
     def __init__(self, command_name, drive):
         self.command_name = command_name.lower()
         self.drive = drive
-        self.params = list()
+        self._params = list()
 
     def check_params(self, outputter):
-        if not self.check_number_of_params(len(self.params)):
+        if not self.check_number_of_params(len(self._params)):
             outputter.println(self.INCORRECT_SYNTAX)
             return False
 
@@ -23,9 +23,14 @@ class Command:
 
         return True
 
-    def set_params(self, params):
-        del self.params[:]
-        self.params = params
+    @property
+    def params(self):
+        return self._params
+
+    @params.setter
+    def params(self, params):
+        del self._params[:]
+        self._params = params
 
     @abc.abstractmethod
     def check_number_of_params(self, num_of_params):
@@ -45,11 +50,11 @@ class Command:
     def compare_cmd_name(self, cmd_name):
         return True
 
-    def params_count(self):
-        return len(self.params)
+    def num_of_params(self):
+        return len(self._params)
 
-    def param_at(self, index):
-        return self.params[index]
+    def param(self, index):
+        return self._params[index]
 
     def __str__(self):
         return self.command_name

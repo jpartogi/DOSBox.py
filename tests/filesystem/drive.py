@@ -28,13 +28,13 @@ class DriveTestCase(unittest.TestCase):
         self.assertEqual(self.drive.current_dir, self.sub_dir1)
 
     def test_item_from_root_path_with_relative_path(self):
-        self.assertEqual(self.drive.item_from_path(self.sub_dir1.path()), self.sub_dir1)
+        self.assertEqual(self.drive.item_from_path(self.sub_dir1.path), self.sub_dir1)
 
     def test_change_dir_to_sub_sub_dir(self):
         self.drive.change_current_dir(self.sub_dir1)
 
         # Test absolute path
-        self.assertEqual(self.drive.item_from_path(self.sub_sub_dir.path()), self.sub_sub_dir)
+        self.assertEqual(self.drive.item_from_path(self.sub_sub_dir.path), self.sub_sub_dir)
 
         # Test relative path
         self.assertEqual(self.drive.item_from_path("subsubdir"), self.sub_sub_dir)

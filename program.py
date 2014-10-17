@@ -1,6 +1,4 @@
-from sys import stdin
-
-from dosbox.configuration.configurator import *
+from dosbox.system.configurator import *
 
 config = Configurator()
-config.configurate_system()
+config.configure_system()

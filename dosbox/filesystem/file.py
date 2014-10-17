@@ -8,10 +8,10 @@ class File(FileSystemItem):
     def is_directory(self):
         return False
 
-    def number_of_contained_files(self):
+    def num_of_contained_files(self):
         return 0
 
-    def number_of_contained_directories(self):
+    def num_of_contained_dirs(self):
         return 0
 
     def size(self):

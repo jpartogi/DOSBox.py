@@ -48,7 +48,7 @@ class Invoker:
         try:
             for cmd in self.commands:
                 if cmd.compare(command_name):
-                    cmd.params = params
+                    cmd._params = params
 
                     if not cmd.check_params(outputter):
                         # outputter.println(self.WRONG_PARAMETER_ERR)

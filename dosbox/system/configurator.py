@@ -4,8 +4,8 @@ from dosbox.console.console import *
 from dosbox.filesystem.drive import *
 
 
-class Configurator:
-    def configurate_system(self):
+class Configurator(object):
+    def configure_system(self):
         drive = Drive("C")
         drive.restore()
 

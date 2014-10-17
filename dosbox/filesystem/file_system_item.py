@@ -21,9 +21,12 @@ class FileSystemItem(object):
         if not self.check_name(name):
             raise(Exception(self.ILLEGAL_ARGUMENT_TEXT))
 
+        self.name = name
+
+    @property
     def path(self):
         if self.parent is not None:
-            return self.parent.path() + "\\" + self.name
+            return self.parent.path + "\\" + self.name
         else:
             # Root directory
             return self.name
@@ -33,11 +36,11 @@ class FileSystemItem(object):
         return NotImplemented
 
     @abc.abstractmethod
-    def number_of_contained_files(self):
+    def num_of_contained_files(self):
         return NotImplemented
 
     @abc.abstractmethod
-    def number_of_contained_directories(self):
+    def num_of_contained_dirs(self):
         return NotImplemented
 
     @abc.abstractmethod
@@ -45,4 +48,4 @@ class FileSystemItem(object):
         return NotImplemented
 
     def __str__(self):
-        return self.path()
+        return self.path

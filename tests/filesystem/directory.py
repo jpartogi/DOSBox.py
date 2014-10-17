@@ -11,7 +11,7 @@ class DirectoryTestCase(unittest.TestCase):
         self.root_dir.add(self.sub_dir1)
 
         self.assertEqual(self.sub_dir1.parent, self.root_dir)
-        self.assertEqual(self.sub_dir1.path(), "root\subdir1")
+        self.assertEqual(self.sub_dir1.path, "root\subdir1")
 
     def test_add_remove(self):
         subdir = Directory("subdir")
@@ -21,3 +21,6 @@ class DirectoryTestCase(unittest.TestCase):
 
         self.root_dir.remove(subdir)
         self.assertEqual(subdir.parent, None)
+
+    def test_number_of_contained_file_system_item(self):
+        return NotImplemented

@@ -15,8 +15,8 @@ class CommandBaseTestCase(unittest.TestCase):
         self.invoker = Invoker()
         self.outputter = MockOutputter()
 
-        self.number_of_dirs_before_test = self.root_dir.number_of_contained_directories()
-        self.number_of_files_before_test = self.root_dir.number_of_contained_files()
+        self.number_of_dirs_before_test = self.root_dir.num_of_contained_dirs()
+        self.number_of_files_before_test = self.root_dir.num_of_contained_files()
 
     def execute_command(self, command):
         self.invoker.execute_command(command, self.outputter)

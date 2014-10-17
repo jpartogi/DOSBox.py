@@ -77,4 +77,4 @@ class InvokerTestCase(unittest.TestCase):
     def test_command_with_params(self):
         self.invoker.execute_command("dir a b", self.outputter)
         self.assertTrue(self.command.executed)
-        self.assertEqual(2, self.command.params_count())
+        self.assertEqual(2, self.command.num_of_params())

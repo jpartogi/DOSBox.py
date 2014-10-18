@@ -3,10 +3,10 @@ from sys import stdin
 from dosbox.console.console_outputter import *
 
 class Console(object):
-    def __init__(self, invoker, drive):
+    def __init__(self, invoker, drive, outputter):
         self.invoker = invoker
         self.drive = drive
-        self.outputter = ConsoleOutputter()
+        self.outputter = outputter
 
     def process_input(self):
         self.outputter.println("DOSBox, Scrum.org, Professional Scrum Developer Training.")

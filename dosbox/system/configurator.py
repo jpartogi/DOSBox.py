@@ -1,6 +1,7 @@
 from dosbox.command.factory import *
 from dosbox.command.invoker import *
 from dosbox.console.console import *
+from dosbox.console.console_outputter import *
 from dosbox.filesystem.drive import *
 
 
@@ -13,5 +14,6 @@ class Configurator(object):
         command_invoker = Invoker()
         command_invoker.commands = command_factory.commands
 
-        console = Console(command_invoker, drive)
+        outputter = ConsoleOutputter()
+        console = Console(command_invoker, drive, outputter)
         console.process_input()
